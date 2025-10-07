@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>IVAO Discord Manager - Welcome to the team!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #D7D7DC;
+        }
+
+        .landing-box {
+            background: white;
+            border-radius: 20px;
+            padding: 70px 60px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .landing-box img {
+            max-width: 210px;
+            margin-bottom: 30px;
+        }
+
+        .landing-box h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+
+        .landing-box p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: #000000;
+        }
+
+        .join-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #0D2C99;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .join-btn:hover {
+            background-color: #3C55AC;
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-box">
+        <img src="https://static.ivao.aero/img/logos/logo.svg" alt="Logo">
+        <h1>Welcome to the Team!</h1>
+        <p>Together, we make the community stronger.</p>
+        <a href="https://sso.ivao.aero/authorize?response_type=code&client_id=4849654f-1dc3-431a-bf0f-8799033f209d&scope=profile+configuration+email&redirect_uri=https%3A%2F%2Fdiscord.sa.ivao.aero%2Ftemp_discord%2Fuser.php&state=1234567890" class="join-btn">Join Now</a>
+    </div>
+</body>
+</html>
