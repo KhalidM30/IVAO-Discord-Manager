@@ -36,7 +36,12 @@ if ($query){
             $vid = $row['vid'];
             $ivaoUser = getIvaoUser(openid_url, ivao_client_id, ivao_client_secret, $vid);
             if ($ivaoUser['isStaff'] == True){
-                $user = new User($vid, $row['name'], $ivaoUser['divisionId'], $ivaoUser['userStaffPositions'], $conn);
+                $isSupervisor = false;
+                // Check if user is supervisor
+                if($row['supervisor'] == 1){
+                    $isSupervisor = true;
+                }
+                $user = new User($vid, $row['name'], $ivaoUser['divisionId'], $ivaoUser['userStaffPositions'], $conn, $isSupervisor);
                 $guilds = $user -> getGuilds();
                 $nicknames = $user -> generateNickname($guilds);
                 $roles = $user -> getRoles($guilds);
@@ -70,7 +75,8 @@ if ($query){
                                 vid: $vid,
                                 name: $ivaoUser['firstName'],
                                 division: $ivaoUser['divisionId'],
-                                positions: json_encode($ivaoUser['userStaffPositions'])
+                                positions: json_encode($ivaoUser['userStaffPositions']),
+                                supervisor: $isSupervisor
                             );
                         } else {
                             // Change nickname if the generated nickname != discord nickname
@@ -101,12 +107,14 @@ if ($query){
                         }
                     }
                 }
+
                 // Modify the DB
                 $query2 = "UPDATE discord_users SET 
                     vid = '".$vid."', 
                     name = '".$row['name']."', 
                     division = '".$ivaoUser['divisionId']."', 
                     nickname = '".$nicknames["fullNickname"]."',
+                    supervisor = '".$row['supervisor']."',
                     last_checked_at = '".date("Y-m-d H:i:s")."',
                     positions = '".json_encode($ivaoUser['userStaffPositions'])."' 
                     WHERE discord_id = ".$discord_user_id." ORDER BY joined_at ASC LIMIT 1";
